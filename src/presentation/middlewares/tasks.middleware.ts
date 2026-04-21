@@ -14,7 +14,7 @@ declare global {
 export const validateTaskExist = async (req: Request, res: Response, next: NextFunction) => {
 
     try {
-        if(!isValidMongoId(req.params.taskId)) return res.status(400).json({error: 'Id inválido de tarea'});
+        if(!isValidMongoId(`${req.params.taskId}`)) return res.status(400).json({error: 'Id inválido de tarea'});
 
         const task = await TaskModel.findById(req.params.taskId);
         if(!task) return res.status(400).json({error: 'Tarea no encontrada'});
