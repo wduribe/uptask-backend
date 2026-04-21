@@ -8,13 +8,14 @@
     "dev:api": "tsnd --respawn --clear src/app.ts --api",
     "build": "rimraf ./dist && tsc",
     "start": "node dist/app.js"
-},
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
     "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.14.1",
