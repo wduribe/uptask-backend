@@ -7,8 +7,8 @@
     "dev": "tsnd --respawn --clear src/app.ts",
     "dev:api": "tsnd --respawn --clear src/app.ts --api",
     "build": "rimraf ./dist && tsc",
-    "start": "node dist/src/app.js"
-  },
+    "start": "node dist/app.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
