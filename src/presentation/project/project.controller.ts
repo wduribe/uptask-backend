@@ -45,14 +45,14 @@ export class ProjectController {
     }
 
     getProjectById = (req: Request, res: Response) => {
-        const isValidId = isValidMongoId(req.params.id);
+        const isValidId = isValidMongoId(`${req.params.id}`);
         
         if(!isValidId){
             res.status(400).json({error: 'Id proyecto inválido'});
             return;
         }
 
-        this.projectService.getProjectById(req.params.id, req.manager)
+        this.projectService.getProjectById(`${req.params.id}`, req.manager)
             .then(project => res.json(project))
             .catch(error => this.handlerErrors(error, res));  
     }
@@ -80,12 +80,12 @@ export class ProjectController {
 
     deleteProject = (req: Request, res: Response) => {
         
-        if(!isValidMongoId(req.params.id)){
+        if(!isValidMongoId(`${req.params.id}`)){
             res.status(400).json({error: 'Id proyecto inválido'});
             return;
         }
         
-        this.projectService.deleteProject(req.params.id, req.manager)
+        this.projectService.deleteProject(`${req.params.id}`, req.manager)
             .then(resp => res.json(resp))
             .catch(error => this.handlerErrors(error, res));
     }

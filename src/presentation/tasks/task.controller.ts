@@ -49,12 +49,12 @@ export class TaskController {
 
     getTaskById = (req: Request, res: Response) => {
 
-        if (!isValidMongoId(req.params.taskId)) {
+        if (!isValidMongoId(`${req.params.taskId}`)) {
             res.status(400).json({ error: 'Id de tarea inválido' });
             return;
         }
 
-        this.taskService.getTaskById(req.params.taskId, req.params.projectId)
+        this.taskService.getTaskById(`${req.params.taskId}`, `${req.params.projectId}`)
             .then(task => res.json(task))
             .catch(error => this.handlerErrors(error, res));
 

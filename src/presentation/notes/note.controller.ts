@@ -52,12 +52,12 @@ export class NoteController {
     deleteNote = (req: Request, res: Response) => {
         const noteId = req.params.noteId;
         
-        if(!isValidMongoId(noteId)){
+        if(!isValidMongoId(`${noteId}`)){
             res.status(400).json({error: 'Id de nota inválido'});
             return; 
         }
 
-        this.noteService.deleteNote(noteId, req.manager.toString(), req.task)
+        this.noteService.deleteNote(`${noteId}`, req.manager.toString(), req.task)
             .then(resp => res.json(resp))
             .catch(error => this.handlerErrors(error, res));
 
