@@ -1,8 +1,7 @@
 import express, { Router } from 'express';
 import path from 'path';
-// import cors from 'cors';
+import cors from 'cors';
 import morgan from 'morgan';
-// import { corsConfig } from '../config';
 
 interface Options {
 	port: number,
@@ -39,7 +38,7 @@ export class Server {
 		this.app.use(express.static(this.publicPath));
 
 		//*Configuration cors
-		// this.app.use(cors(corsConfig));
+		this.app.use(cors());
 		this.app.use(morgan('dev'));
 
 		//* SPA /^\/(?!api).*/  <== Únicamente si no empieza con la palabra api
