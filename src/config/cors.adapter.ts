@@ -9,6 +9,7 @@ export const corsConfig: CorsOptions = {
         let whiteList: [string | undefined] = [FRONTED_URL];
 
         if(process.argv[2] === '--api'){    
+            
             whiteList.push(origin);
         }
 
