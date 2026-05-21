@@ -26,7 +26,7 @@ export class AuthService {
             token.token = generateToken();
             token.user = newUser.id;
 
-            await this.authSendEmailService.sendConfirmationEmail({ email: newUser.email, name: newUser.name, token: token.token });
+            const isSend = await this.authSendEmailService.sendConfirmationEmail({ email: newUser.email, name: newUser.name, token: token.token });
 
             await Promise.allSettled([newUser.save(), token.save()]);
 
@@ -72,12 +72,13 @@ export class AuthService {
                 await token.save();
 
                 //Enviando email
-                await this.authSendEmailService.sendConfirmationEmail({
+                const isSend = await this.authSendEmailService.sendConfirmationEmail({
                     email: user.email,
                     name: user.name,
                     token: token.token
                 });
 
+                if (!isSend) throw CustomError.internalServer('Error Mientras enviaba el correo');
 
                 throw CustomError.badRequest('La cuenta no ha sido confirmada, hemos enviado un e-mail de confirmación');
 
@@ -104,11 +105,13 @@ export class AuthService {
             token.token = generateToken();
 
             //Enviando email
-            await this.authSendEmailService.sendConfirmationEmail({
+            const isSend = await this.authSendEmailService.sendConfirmationEmail({
                 email: user.email,
                 name: user.name,
                 token: token.token
             });
+
+            if (!isSend) throw CustomError.internalServer('Error Mientras enviaba el correo');
 
             await Promise.allSettled([user.save(), token.save()]);
 
@@ -129,13 +132,14 @@ export class AuthService {
             await token.save();
 
             //Enviando email
-            console.log('Antes de enviar email');
-            await this.authSendEmailService.sendPasswordResetToken({
+            const isSend = await this.authSendEmailService.sendPasswordResetToken({
                 email: user.email,
                 name: user.name,
                 token: token.token
             });
-            console.log('Despues de enviar email');
+
+            if (!isSend) throw CustomError.internalServer('Error Mientras enviaba el correo');
+
             return 'Revisa tu email para reestablecer contraseña';
 
         } catch (error) {
