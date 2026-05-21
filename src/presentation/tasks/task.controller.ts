@@ -59,6 +59,8 @@ export class TaskController {
             .catch(error => this.handlerErrors(error, res));
 
 
+
+            
     } 
 
     updateTask = (req: Request, res: Response) => {
