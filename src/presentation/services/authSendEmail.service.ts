@@ -8,10 +8,12 @@ interface IEmail {
 
 export class AuthSendEmailService {
 
-    
+
 
     sendConfirmationEmail = async ({ email, name, token }: IEmail) => {
         try {
+
+
             const info = await transporter.sendMail({
                 from: 'UpTask <urbina153@gmail.com>',
                 to: email,
@@ -34,6 +36,13 @@ export class AuthSendEmailService {
 
     sendPasswordResetToken = async ({ email, name, token }: IEmail) => {
         try {
+
+            console.log("TEST SMTP START");
+
+            await transporter.verify();
+
+            console.log("SMTP OK");
+
             const info = await transporter.sendMail({
                 from: 'UpTask <urbina153@gmail.com>',
                 to: email,
@@ -50,6 +59,7 @@ export class AuthSendEmailService {
 
             return true;
         } catch (error) {
+            console.log(error)
             return false;
         }
 

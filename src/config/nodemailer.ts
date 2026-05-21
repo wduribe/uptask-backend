@@ -14,7 +14,8 @@ const config = () => {
             pass: MAILER_SECRET_KEY
         },
         connectionTimeout: 10000,
-        socketTimeout: 10000
+        socketTimeout: 10000,
+        family: 4,
     }
 }
 
