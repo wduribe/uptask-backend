@@ -129,12 +129,13 @@ export class AuthService {
             await token.save();
 
             //Enviando email
+            console.log('Antes de enviar email');
             await this.authSendEmailService.sendPasswordResetToken({
                 email: user.email,
                 name: user.name,
                 token: token.token
             });
-
+            console.log('Despues de enviar email');
             return 'Revisa tu email para reestablecer contraseña';
 
         } catch (error) {
