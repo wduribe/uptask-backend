@@ -22,15 +22,17 @@ export class AuthService {
             const passwordHashed = bcryptAdapter.hash(registerUserDto.password);
             newUser.password = passwordHashed;
 
-            const token = new TokenModel();
-            token.token = generateToken();
-            token.user = newUser.id;
+            // const token = new TokenModel();
+            // token.token = generateToken();
+            // token.user = newUser.id;
 
-            await this.authSendEmailService.sendConfirmationEmail({ email: newUser.email, name: newUser.name, token: token.token });
+            // await this.authSendEmailService.sendConfirmationEmail({ email: newUser.email, name: newUser.name, token: token.token });
 
-            await Promise.allSettled([newUser.save(), token.save()]);
+            // await Promise.allSettled([newUser.save(), token.save()]);
 
-            return 'Cuenta creada, revisa tu email';
+            await newUser.save();
+
+            return 'Cuenta creada correctamente';
 
         } catch (error) {
             throw CustomError.internalServer(`${error}`);
@@ -65,23 +67,23 @@ export class AuthService {
             const passwordMatch = bcryptAdapter.compareHash(loginUserDto.password, user.password);
             if (!passwordMatch) throw CustomError.badRequest('Contraseña o email inválidos');
 
-            if (!user.confirmed) {
-                const token = new TokenModel();
-                token.user = user.id;
-                token.token = generateToken();
-                await token.save();
+            // if (!user.confirmed) {
+            //     const token = new TokenModel();
+            //     token.user = user.id;
+            //     token.token = generateToken();
+            //     await token.save();
 
-                //Enviando email
-                await this.authSendEmailService.sendConfirmationEmail({
-                    email: user.email,
-                    name: user.name,
-                    token: token.token
-                });
+            //     //Enviando email
+            //     await this.authSendEmailService.sendConfirmationEmail({
+            //         email: user.email,
+            //         name: user.name,
+            //         token: token.token
+            //     });
 
 
-                throw CustomError.badRequest('La cuenta no ha sido confirmada, hemos enviado un e-mail de confirmación');
+            //     throw CustomError.badRequest('La cuenta no ha sido confirmada, hemos enviado un e-mail de confirmación');
 
-            }
+            // }
 
             const token = await jwtAdapter.generateToken<string>({ id: user.id });
 
