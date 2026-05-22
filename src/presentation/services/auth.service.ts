@@ -26,11 +26,10 @@ export class AuthService {
             // token.token = generateToken();
             // token.user = newUser.id;
 
-<<<<<<< HEAD
             // await this.authSendEmailService.sendConfirmationEmail({ email: newUser.email, name: newUser.name, token: token.token });
-=======
-            const isSend = await this.authSendEmailService.sendConfirmationEmail({ email: newUser.email, name: newUser.name, token: token.token });
->>>>>>> aab4fc5f6237a51e5ec6e7f6c3764dd7c0a66aad
+
+            // const isSend = await this.authSendEmailService.sendConfirmationEmail({ email: newUser.email, name: newUser.name, token: token.token });
+
 
             // await Promise.allSettled([newUser.save(), token.save()]);
 
@@ -77,23 +76,22 @@ export class AuthService {
             //     token.token = generateToken();
             //     await token.save();
 
-<<<<<<< HEAD
+
             //     //Enviando email
             //     await this.authSendEmailService.sendConfirmationEmail({
             //         email: user.email,
             //         name: user.name,
             //         token: token.token
             //     });
-=======
-                //Enviando email
-                const isSend = await this.authSendEmailService.sendConfirmationEmail({
-                    email: user.email,
-                    name: user.name,
-                    token: token.token
-                });
->>>>>>> aab4fc5f6237a51e5ec6e7f6c3764dd7c0a66aad
 
-                if (!isSend) throw CustomError.internalServer('Error Mientras enviaba el correo');
+            //Enviando email
+            // const isSend = await this.authSendEmailService.sendConfirmationEmail({
+            //     email: user.email,
+            //     name: user.name,
+            //     token: token.token
+            // });
+
+            // if (!isSend) throw CustomError.internalServer('Error Mientras enviaba el correo');
 
             //     throw CustomError.badRequest('La cuenta no ha sido confirmada, hemos enviado un e-mail de confirmación');
 
@@ -147,21 +145,18 @@ export class AuthService {
             await token.save();
 
             //Enviando email
-<<<<<<< HEAD
-            await this.authSendEmailService.sendPasswordResetToken({
-=======
-            const isSend = await this.authSendEmailService.sendPasswordResetToken({
->>>>>>> aab4fc5f6237a51e5ec6e7f6c3764dd7c0a66aad
-                email: user.email,
-                name: user.name,
-                token: token.token
-            });
 
-<<<<<<< HEAD
-=======
-            if (!isSend) throw CustomError.internalServer('Error Mientras enviaba el correo');
+            // await this.authSendEmailService.sendPasswordResetToken({
 
->>>>>>> aab4fc5f6237a51e5ec6e7f6c3764dd7c0a66aad
+            // const isSend = await this.authSendEmailService.sendPasswordResetToken({
+
+            //     email: user.email,
+            //     name: user.name,
+            //     token: token.token
+            // });
+
+            // if (!isSend) throw CustomError.internalServer('Error Mientras enviaba el correo');
+
             return 'Revisa tu email para reestablecer contraseña';
 
         } catch (error) {
